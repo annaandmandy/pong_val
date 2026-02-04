@@ -1,0 +1,151 @@
+{
+  "cards": [
+    {
+      "id": "R1",
+      "rarity": "R",
+      "name": "初次相遇",
+      "title": "「圖書館的那個午後」",
+      "quote": "你問我借了一支筆，從此我的心就借給了你。",
+      "image": "assets/cards/example.jpeg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "一個擁抱 (隨時兌換)"
+      }
+    },
+    {
+      "id": "R2",
+      "rarity": "R",
+      "name": "溫暖微笑",
+      "title": "「早晨的陽光」",
+      "quote": "你的笑容比咖啡更能讓我清醒。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "早餐服務一次 (未兌換)"
+      }
+    },
+    {
+      "id": "R3",
+      "rarity": "R",
+      "name": "日常時光",
+      "title": "「沙發上的週末」",
+      "quote": "什麼都不做，只是和你待在一起，就是最美好的時光。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "選電影權一次 (未兌換)"
+      }
+    },
+    {
+      "id": "R4",
+      "rarity": "R",
+      "name": "甜蜜問候",
+      "title": "「深夜的訊息」",
+      "quote": "每次收到你的晚安，都捨不得睡覺。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "睡前故事一則 (未兌換)"
+      }
+    },
+    {
+      "id": "SR1",
+      "rarity": "SR",
+      "name": "心動瞬間",
+      "title": "「第一次牽手」",
+      "quote": "那天人很多，你說怕走散，然後握住了我的手。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "看電影約會一次 (未兌換)"
+      }
+    },
+    {
+      "id": "SR2",
+      "rarity": "SR",
+      "name": "浪漫約會",
+      "title": "「海邊的日落」",
+      "quote": "夕陽很美，但我一直在看你。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "海邊約會一次 (未兌換)"
+      }
+    },
+    {
+      "id": "SR3",
+      "rarity": "SR",
+      "name": "深情告白",
+      "title": "「那句我愛你」",
+      "quote": "說出口的那一刻，整個世界都在發光。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "想要的禮物一份 (未兌換)"
+      }
+    },
+    {
+      "id": "SSR1",
+      "rarity": "SSR",
+      "name": "永恆誓言",
+      "title": "「雨天下的共傘」",
+      "quote": "那天雨很大，但靠在你肩膀上好安心。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "按摩 30 分鐘券 (未兌換)"
+      }
+    },
+    {
+      "id": "SSR2",
+      "rarity": "SSR",
+      "name": "星空之約",
+      "title": "「屋頂上的流星」",
+      "quote": "你說要和我一起看一千顆流星，我們才看了三顆就睡著了。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "愛的憑證",
+        "value": "週末旅行一次 (未兌換)"
+      }
+    },
+    {
+      "id": "UR1",
+      "rarity": "UR",
+      "name": "摯愛之心",
+      "title": "「永遠的你和我」",
+      "quote": "在所有平行宇宙中，我都只想找到你。",
+      "image": "assets/cards/example.svg",
+      "perk": {
+        "label": "終極大獎",
+        "value": "真實世界的神秘禮物 ✨"
+      }
+    }
+  ],
+  "rarityConfig": {
+    "R": {
+      "color": "#808080",
+      "glowColor": "rgba(128, 128, 128, 0.6)",
+      "name": "普通",
+      "bgGradient": "linear-gradient(135deg, #d4d4d4 0%, #9e9e9e 100%)"
+    },
+    "SR": {
+      "color": "#4169E1",
+      "glowColor": "rgba(65, 105, 225, 0.8)",
+      "name": "稀有",
+      "bgGradient": "linear-gradient(135deg, #667eea 0%, #4169E1 100%)"
+    },
+    "SSR": {
+      "color": "#9400D3",
+      "glowColor": "rgba(148, 0, 211, 0.8)",
+      "name": "史詩",
+      "bgGradient": "linear-gradient(135deg, #f093fb 0%, #9400D3 100%)"
+    },
+    "UR": {
+      "color": "#FFD700",
+      "glowColor": "rgba(255, 215, 0, 1)",
+      "name": "傳說",
+      "bgGradient": "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)"
+    }
+  }
+}
+

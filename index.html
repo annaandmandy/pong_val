@@ -29,11 +29,10 @@
 
         #message-area {
             position: absolute;
-            top: 20px;
+            top: 70px;
             text-align: center;
             font-size: 1.2em;
             color: #ff69b4;
-            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
             animation: pulse 2s ease-in-out infinite;
             z-index: 10;
             max-width: 90%;
@@ -47,7 +46,7 @@
 
         #game-container {
             position: relative;
-            box-shadow: 0 0 40px rgba(255, 0, 110, 0.5);
+            box-shadow: 0 4px 20px rgba(255, 0, 110, 0.3);
             border-radius: 10px;
             overflow: hidden;
             touch-action: none;
@@ -70,7 +69,6 @@
             text-align: center;
             font-size: 2em;
             color: #ff006e;
-            text-shadow: 0 0 20px rgba(255, 0, 110, 0.9);
             z-index: 10;
             font-weight: bold;
         }
@@ -217,14 +215,14 @@
         }
 
         .mode-btn.selected {
-            background: linear-gradient(135deg, #ff006e, #8b00ff);
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.8);
+            background: rgba(255, 0, 110, 0.6);
+            border-color: #ff006e;
             transform: scale(1.05);
         }
 
         .mode-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 0, 110, 0.6);
+            background: rgba(255, 0, 110, 0.4);
         }
 
         #start-button {
@@ -233,18 +231,17 @@
             font-family: 'Courier New', monospace;
             font-weight: bold;
             color: white;
-            background: linear-gradient(135deg, #ff006e, #8b00ff);
-            border: 3px solid #ff69b4;
-            border-radius: 15px;
+            background: rgba(255, 0, 110, 0.5);
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8);
             transition: all 0.3s ease;
             animation: glow 2s ease-in-out infinite;
         }
 
         #start-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 50px rgba(255, 0, 110, 1);
+            transform: scale(1.05);
+            background: rgba(255, 0, 110, 0.7);
         }
 
         #start-button:active {
@@ -258,37 +255,733 @@
 
         .corner-image {
             position: fixed;
-            z-index: 5;
+            z-index: 1;
             pointer-events: none;
-            opacity: 0.8;
+            opacity: 0.6;
+            max-width: 2000px;
+            max-height: 2000px;
+            object-fit: contain;
         }
 
         .corner-top-left {
             top: 0;
             left: 0;
-            max-width: 2000px;
-            max-height: 2000px;
         }
 
         .corner-top-right {
             top: 0;
             right: 0;
-            max-width: 2000px;
-            max-height: 2000px;
         }
 
         .corner-bottom-left {
             bottom: 0;
             left: 0;
-            max-width: 2000px;
-            max-height: 2000px;
         }
 
         .corner-bottom-right {
             bottom: 0;
             right: 0;
-            max-width: 2000px;
-            max-height: 2000px;
+        }
+
+        /* ===== LAYER 1: LANDING PAGE (ENVELOPE) ===== */
+        #landing-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0a1e 0%, #2d1b3d 50%, #1a0a1e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.5s ease;
+        }
+
+        #landing-screen.hidden {
+            display: none;
+        }
+
+        #envelope-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #envelope-container:hover {
+            transform: scale(1.05);
+        }
+
+        #envelope-image {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 40px rgba(255, 0, 110, 0.8));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        #landing-message {
+            margin-top: 40px;
+            font-size: 1.5em;
+            color: #ff69b4;
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite;
+            max-width: 80%;
+        }
+
+        #unlock-button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: white;
+            background: rgba(255, 0, 110, 0.4);
+            border: 2px solid #ff69b4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        #unlock-button:hover {
+            transform: scale(1.05);
+            background: rgba(255, 0, 110, 0.6);
+        }
+
+        /* ===== LAYER 2: TOKEN SYSTEM ===== */
+        /* Top toolbar - clean and centered */
+        #game-toolbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+        }
+
+        #game-toolbar.hidden {
+            display: none;
+        }
+
+        #token-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #token-icon {
+            width: 28px;
+            height: 28px;
+            background: #ffd700;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1em;
+        }
+
+        #token-count {
+            font-size: 1.3em;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        #toolbar-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(255, 105, 180, 0.3);
+        }
+
+        #gacha-button {
+            padding: 8px 16px;
+            font-size: 0.95em;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: white;
+            background: rgba(255, 0, 110, 0.3);
+            border: 1px solid rgba(255, 105, 180, 0.6);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #gacha-button:hover:not(:disabled) {
+            background: rgba(255, 0, 110, 0.5);
+            border-color: rgba(255, 105, 180, 0.9);
+        }
+
+        #gacha-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ===== LAYER 3: GACHA MACHINE ===== */
+        #gacha-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            animation: fadeIn 0.5s ease;
+        }
+
+        #gacha-screen.active {
+            display: flex;
+        }
+
+        #gacha-machine {
+            position: relative;
+            width: 600px;
+            height: 700px;
+            background: linear-gradient(135deg, #2d1b3d 0%, #1a0a1e 100%);
+            border: 5px solid #ff69b4;
+            border-radius: 30px;
+            box-shadow: 0 0 60px rgba(255, 0, 110, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+
+        #gacha-title {
+            font-size: 2.5em;
+            color: #ff69b4;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
+            margin-bottom: 20px;
+        }
+
+        #gacha-display {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 3px solid #ff006e;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #gacha-display.animating {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-2deg); }
+            75% { transform: translateX(10px) rotate(2deg); }
+        }
+
+        #gacha-card {
+            width: 90%;
+            height: 90%;
+            background: white;
+            border-radius: 15px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8);
+            transform: scale(0);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        #gacha-card.show {
+            display: flex;
+            transform: scale(1);
+        }
+
+        #card-image {
+            width: 100%;
+            height: 70%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        #card-rarity {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 15px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .rarity-R { color: #808080; }
+        .rarity-SR { color: #4169E1; }
+        .rarity-SSR { color: #9400D3; }
+        .rarity-UR { color: #FFD700; }
+
+        /* ===== DETAILED CARD TEMPLATE ===== */
+        .card-template {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 60%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .rarity-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .tier-R .rarity-glow {
+            background: rgba(128, 128, 128, 0.3);
+        }
+
+        .tier-SR .rarity-glow {
+            background: rgba(65, 105, 225, 0.4);
+        }
+
+        .tier-SSR .rarity-glow {
+            background: rgba(148, 0, 211, 0.4);
+        }
+
+        .tier-UR .rarity-glow {
+            background: rgba(255, 215, 0, 0.5);
+            animation: urGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes urGlow {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.3; }
+        }
+
+        .rarity-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 4px;
+            z-index: 10;
+        }
+
+        .tier-R .rarity-badge {
+            background: rgba(128, 128, 128, 0.9);
+            color: #333;
+        }
+
+        .tier-SR .rarity-badge {
+            background: rgba(65, 105, 225, 0.9);
+            color: white;
+        }
+
+        .tier-SSR .rarity-badge {
+            background: rgba(148, 0, 211, 0.9);
+            color: white;
+        }
+
+        .tier-UR .rarity-badge {
+            background: rgba(255, 215, 0, 0.95);
+            color: #000;
+        }
+
+        .card-info {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tier-R .card-info {
+            background: #b0b0b0;
+            color: #333;
+        }
+
+        .tier-SR .card-info {
+            background: #4169E1;
+            color: white;
+        }
+
+        .tier-SSR .card-info {
+            background: #9400D3;
+            color: white;
+        }
+
+        .tier-UR .card-info {
+            background: #FFD700;
+            color: #000;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .card-quote {
+            font-size: 0.95em;
+            line-height: 1.4;
+            margin: 0 0 15px 0;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        .tier-R .card-quote {
+            color: #1a1a1a;
+        }
+
+        .perk-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .tier-UR .perk-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .perk-label {
+            font-weight: bold;
+            opacity: 0.8;
+        }
+
+        .perk-value {
+            font-weight: normal;
+        }
+
+        .tier-R .perk-box {
+            background: rgba(255, 255, 255, 0.3);
+            color: #000;
+        }
+
+        #pull-button {
+            padding: 20px 50px;
+            font-size: 1.5em;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #ff006e, #8b00ff);
+            border: 3px solid #ff69b4;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        #pull-button:hover:not(:disabled) {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255, 0, 110, 1);
+        }
+
+        #pull-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #close-gacha {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            color: white;
+            background: rgba(255, 0, 110, 0.5);
+            border: 2px solid #ff69b4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #close-gacha:hover {
+            background: rgba(255, 0, 110, 0.8);
+        }
+
+        /* ===== LAYER 4: COLLECTION GALLERY ===== */
+        #collection-button {
+            padding: 8px 16px;
+            font-size: 0.95em;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: white;
+            background: rgba(255, 0, 110, 0.2);
+            border: 1px solid rgba(255, 105, 180, 0.5);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #collection-button:hover {
+            background: rgba(255, 0, 110, 0.3);
+            border-color: rgba(255, 105, 180, 0.8);
+        }
+
+        #collection-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            animation: fadeIn 0.5s ease;
+        }
+
+        #collection-screen.active {
+            display: flex;
+        }
+
+        #collection-content {
+            width: 90%;
+            max-width: 1000px;
+            height: 80%;
+            background: linear-gradient(135deg, #2d1b3d 0%, #1a0a1e 100%);
+            border: 5px solid #ff69b4;
+            border-radius: 30px;
+            box-shadow: 0 0 60px rgba(255, 0, 110, 0.9);
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        #collection-header {
+            font-size: 2.5em;
+            color: #ff69b4;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #collection-progress {
+            font-size: 1.3em;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        #collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .collection-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 3px solid #ff69b4;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            aspect-ratio: 2/3;
+        }
+
+        .collection-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.8);
+        }
+
+        .collection-card.locked {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .collection-card.locked:hover {
+            transform: none;
+        }
+
+        /* Smaller card template for collection */
+        .collection-card .card-template {
+            width: 100%;
+            height: 100%;
+        }
+
+        .collection-card .card-image-wrapper {
+            height: 55%;
+        }
+
+        .collection-card .card-title {
+            font-size: 1.1em;
+        }
+
+        .collection-card .card-quote {
+            font-size: 0.85em;
+        }
+
+        .collection-card .perk-box {
+            font-size: 0.8em;
+            padding: 8px;
+        }
+
+        .collection-card .rarity-badge {
+            font-size: 1em;
+            padding: 3px 10px;
+        }
+
+        /* Locked card overlay */
+        .collection-card.locked .card-template {
+            filter: grayscale(100%) brightness(0.4);
+        }
+
+        .collection-card.locked::after {
+            content: '?';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5em;
+            color: #666;
+            font-weight: bold;
+            z-index: 100;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        #close-collection {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            color: white;
+            background: rgba(255, 0, 110, 0.5);
+            border: 2px solid #ff69b4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #close-collection:hover {
+            background: rgba(255, 0, 110, 0.8);
+        }
+
+        /* ===== GRAND PRIZE SCREEN ===== */
+        #prize-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeIn 1s ease;
+        }
+
+        #prize-screen.active {
+            display: flex;
+        }
+
+        #prize-content {
+            text-align: center;
+            padding: 50px;
+            max-width: 800px;
+            animation: scaleIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        #prize-animation {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            background: radial-gradient(circle, #ffd700, #ff006e);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: prizeGlow 2s ease-in-out infinite;
+            box-shadow: 0 0 100px rgba(255, 215, 0, 0.9);
+        }
+
+        @keyframes prizeGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 100px rgba(255, 215, 0, 0.9); }
+            50% { transform: scale(1.1); box-shadow: 0 0 150px rgba(255, 215, 0, 1); }
+        }
+
+        #prize-message {
+            font-size: 2.5em;
+            color: #ffd700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        #prize-clue {
+            font-size: 1.5em;
+            color: #ff69b4;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 0, 110, 0.1);
+            border: 2px solid #ff69b4;
+            border-radius: 15px;
+        }
+
+        #continue-playing {
+            margin-top: 40px;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #ff006e, #8b00ff);
+            border: 3px solid #ff69b4;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        #continue-playing:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 0, 110, 1);
         }
 
         @media (max-width: 768px) {
@@ -314,10 +1007,33 @@
     </style>
 </head>
 <body>
-    <img src="assets/left_top.png" class="corner-image corner-top-left" alt="">
-    <img src="assets/right_top.png" class="corner-image corner-top-right" alt="">
-    <img src="assets/left_bottom.png" class="corner-image corner-bottom-left" alt="">
-    <img src="assets/right_bottom.png" class="corner-image corner-bottom-right" alt="">
+    <!-- Corner decorations -->
+    <img src="assets/left_top.PNG" class="corner-image corner-top-left" alt="">
+    <img src="assets/right_top.PNG" class="corner-image corner-top-right" alt="">
+    <img src="assets/left_bottom.PNG" class="corner-image corner-bottom-left" alt="">
+    <img src="assets/right_bottom.PNG" class="corner-image corner-bottom-right" alt="">
+
+    <!-- LAYER 1: Landing Screen (Envelope) -->
+    <div id="landing-screen">
+        <div id="envelope-container">
+            <img id="envelope-image" src="assets/envelope.png" alt="Envelope" onerror="this.style.display='none';">
+        </div>
+        <div id="landing-message">
+            這是一份專屬於你的挑戰<br>你準備好贏走我的心了嗎？
+        </div>
+        <button id="unlock-button">解鎖 ❤️</button>
+    </div>
+
+    <!-- Top Toolbar (Layer 2) -->
+    <div id="game-toolbar" class="hidden">
+        <button id="collection-button">收藏 📚</button>
+        <div id="toolbar-divider"></div>
+        <div id="token-display">
+            <div id="token-icon">💰</div>
+            <div id="token-count">0</div>
+        </div>
+        <button id="gacha-button" disabled>抽獎 (需要 5 枚)</button>
+    </div>
 
     <div id="message-area">Loading your Valentine's gift...</div>
     <div id="score">You: <span id="player-score">0</span> | AI: <span id="ai-score">0</span></div>
@@ -343,6 +1059,47 @@
         <div id="win-content">
             <h1><span class="heart">❤️</span> You won my heart! <span class="heart">❤️</span></h1>
             <p>You're absolutely amazing at this!<br>Dinner is on me tonight. ❤️<br><br>Happy Valentine's Day, my love!</p>
+        </div>
+    </div>
+
+    <!-- LAYER 3: Gacha Screen -->
+    <div id="gacha-screen">
+        <div id="gacha-machine">
+            <button id="close-gacha">返回遊戲</button>
+            <div id="gacha-title">愛的扭蛋機 ❤️</div>
+            <div id="gacha-display">
+                <div id="gacha-card">
+                    <img id="card-image" src="" alt="Card">
+                    <div id="card-rarity"></div>
+                </div>
+            </div>
+            <button id="pull-button">抽一次 (5 💰)</button>
+        </div>
+    </div>
+
+    <!-- LAYER 4: Collection Gallery -->
+    <div id="collection-screen">
+        <div id="collection-content">
+            <button id="close-collection">關閉</button>
+            <div id="collection-header">我的收藏 ❤️</div>
+            <div id="collection-progress">收集進度: <span id="progress-text">0/0</span></div>
+            <div id="collection-grid"></div>
+        </div>
+    </div>
+
+    <!-- Grand Prize Screen -->
+    <div id="prize-screen">
+        <div id="prize-content">
+            <div id="prize-animation">
+                <span style="font-size: 5em;">💝</span>
+            </div>
+            <div id="prize-message">
+                <!-- Will be filled by JavaScript -->
+            </div>
+            <div id="prize-clue">
+                <!-- Will be filled by JavaScript -->
+            </div>
+            <button id="continue-playing">繼續收集卡片</button>
         </div>
     </div>
 
@@ -373,8 +1130,74 @@
             pausedTime: 0,
             twoPlayerMode: false,
             ballFrozen: false,
-            ballFreezeTime: 0
+            ballFreezeTime: 0,
+            // NEW: Layer system
+            currentLayer: 'LANDING', // LANDING, GAME, GACHA, COLLECTION, PRIZE
+            tokens: 0,
+            pityCounter: 0, // For guaranteed UR within 5 pulls
+            unlockedCards: [],
+            urUnlocked: false
         };
+
+        // ===== CARD DEFINITIONS =====
+        let cardDatabase = [];
+        let rarityConfig = {};
+
+        // Load card configuration from JSON
+        async function loadCardConfig() {
+            try {
+                const response = await fetch('cards-config.json');
+                const config = await response.json();
+                cardDatabase = config.cards;
+                rarityConfig = config.rarityConfig;
+            } catch (error) {
+                console.error('Failed to load cards config, using defaults:', error);
+                // Fallback to default cards if JSON fails to load
+                cardDatabase = [
+                    { id: 'R1', rarity: 'R', name: '初次相遇', image: 'assets/cards/example.jpeg', title: '「初次相遇」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'R2', rarity: 'R', name: '溫暖微笑', image: 'assets/cards/example.jpeg', title: '「溫暖微笑」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'R3', rarity: 'R', name: '日常時光', image: 'assets/cards/example.jpeg', title: '「日常時光」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'R4', rarity: 'R', name: '甜蜜問候', image: 'assets/cards/example.jpeg', title: '「甜蜜問候」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'SR1', rarity: 'SR', name: '心動瞬間', image: 'assets/cards/example.jpeg', title: '「心動瞬間」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'SR2', rarity: 'SR', name: '浪漫約會', image: 'assets/cards/example.jpeg', title: '「浪漫約會」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'SR3', rarity: 'SR', name: '深情告白', image: 'assets/cards/example.jpeg', title: '「深情告白」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'SSR1', rarity: 'SSR', name: '永恆誓言', image: 'assets/cards/example.jpeg', title: '「永恆誓言」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'SSR2', rarity: 'SSR', name: '星空之約', image: 'assets/cards/example.jpeg', title: '「星空之約」', quote: '...', perk: { label: '愛的憑證', value: '...' } },
+                    { id: 'UR1', rarity: 'UR', name: '摯愛之心', image: 'assets/cards/example.jpeg', title: '「摯愛之心」', quote: '...', perk: { label: '終極大獎', value: '...' } }
+                ];
+            }
+        }
+
+        // ===== GACHA RATES =====
+        const gachaRates = {
+            R: 0.40,  // 40%
+            SR: 0.40, // 40%
+            SSR: 0.15, // 15%
+            UR: 0.05  // 5%
+        };
+
+        // ===== LOCALSTORAGE MANAGEMENT =====
+        function saveGameData() {
+            localStorage.setItem('loveTokens', game.tokens);
+            localStorage.setItem('unlockedCards', JSON.stringify(game.unlockedCards));
+            localStorage.setItem('pityCounter', game.pityCounter);
+            localStorage.setItem('urUnlocked', game.urUnlocked);
+        }
+
+        function loadGameData() {
+            const savedTokens = localStorage.getItem('loveTokens');
+            const savedCards = localStorage.getItem('unlockedCards');
+            const savedPity = localStorage.getItem('pityCounter');
+            const savedUR = localStorage.getItem('urUnlocked');
+
+            if (savedTokens !== null) game.tokens = parseInt(savedTokens);
+            if (savedCards !== null) game.unlockedCards = JSON.parse(savedCards);
+            if (savedPity !== null) game.pityCounter = parseInt(savedPity);
+            if (savedUR !== null) game.urUnlocked = savedUR === 'true';
+
+            updateTokenDisplay();
+            updateGachaButton();
+        }
 
         // ===== GAME OBJECTS =====
         const paddle = {
@@ -628,6 +1451,257 @@
             }
         }
 
+        // ===== TOKEN SYSTEM =====
+        function addTokens(amount) {
+            game.tokens += amount;
+            updateTokenDisplay();
+            updateGachaButton();
+            saveGameData();
+
+            // Visual feedback - animate token gain
+            const tokenDisplay = document.getElementById('token-display');
+            tokenDisplay.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                tokenDisplay.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function updateTokenDisplay() {
+            document.getElementById('token-count').textContent = game.tokens;
+        }
+
+        function updateGachaButton() {
+            const gachaBtn = document.getElementById('gacha-button');
+            if (game.tokens >= 5) {
+                gachaBtn.disabled = false;
+                gachaBtn.textContent = '抽獎 (5 💰)';
+            } else {
+                gachaBtn.disabled = true;
+                gachaBtn.textContent = `抽獎 (需要 ${5 - game.tokens} 枚)`;
+            }
+        }
+
+        // ===== GACHA SYSTEM =====
+        function performGacha() {
+            if (game.tokens < 5) return;
+
+            game.tokens -= 5;
+            game.pityCounter++;
+            saveGameData();
+            updateTokenDisplay();
+            updateGachaButton();
+
+            // Determine rarity
+            let rarity;
+            if (game.pityCounter >= 5 && !game.urUnlocked) {
+                // Guaranteed UR at 5 pulls if not unlocked yet
+                rarity = 'UR';
+                game.pityCounter = 0;
+            } else {
+                // Normal gacha rates
+                const roll = Math.random();
+                let cumulative = 0;
+
+                for (const [rarityKey, rate] of Object.entries(gachaRates)) {
+                    cumulative += rate;
+                    if (roll < cumulative) {
+                        rarity = rarityKey;
+                        break;
+                    }
+                }
+
+                // Reset pity if got UR naturally
+                if (rarity === 'UR') {
+                    game.pityCounter = 0;
+                }
+            }
+
+            // Select random card of that rarity
+            const cardsOfRarity = cardDatabase.filter(c => c.rarity === rarity);
+            const selectedCard = cardsOfRarity[Math.floor(Math.random() * cardsOfRarity.length)];
+
+            // Add to unlocked cards if not already unlocked
+            if (!game.unlockedCards.includes(selectedCard.id)) {
+                game.unlockedCards.push(selectedCard.id);
+                saveGameData();
+            }
+
+            // Check if UR was unlocked
+            if (rarity === 'UR' && !game.urUnlocked) {
+                game.urUnlocked = true;
+                saveGameData();
+            }
+
+            // Show the card with animation
+            showGachaCard(selectedCard);
+
+            return selectedCard;
+        }
+
+        function showGachaCard(card) {
+            const display = document.getElementById('gacha-display');
+            const cardElement = document.getElementById('gacha-card');
+
+            // Reset
+            cardElement.classList.remove('show');
+            display.classList.remove('animating');
+
+            // Start animation
+            setTimeout(() => {
+                display.classList.add('animating');
+
+                // Show card after animation
+                setTimeout(() => {
+                    // Create detailed card template
+                    cardElement.innerHTML = `
+                        <div class="card-template tier-${card.rarity}">
+                            <div class="card-image-wrapper">
+                                <img src="${card.image}" alt="${card.name}"
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23${card.rarity === 'UR' ? 'FFD700' : card.rarity === 'SSR' ? '9400D3' : card.rarity === 'SR' ? '4169E1' : '808080'}%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-family=%22monospace%22%3E${card.name}%3C/text%3E%3C/svg%3E'">
+                                <div class="rarity-glow"></div>
+                            </div>
+                            <div class="rarity-badge">${card.rarity}</div>
+                            <div class="card-info">
+                                <div>
+                                    <h3 class="card-title">${card.title || card.name}</h3>
+                                    <p class="card-quote">${card.quote || '...'}</p>
+                                </div>
+                                <div class="perk-box">
+                                    <span class="perk-label">${card.perk?.label || '愛的憑證'}：</span>
+                                    <span class="perk-value">${card.perk?.value || '未定義'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    cardElement.classList.add('show');
+
+                    // Check if UR - show grand prize screen
+                    if (card.rarity === 'UR' && !document.getElementById('prize-screen').classList.contains('active')) {
+                        setTimeout(() => {
+                            showGrandPrize();
+                        }, 2000);
+                    }
+                }, 500);
+            }, 100);
+        }
+
+        // ===== COLLECTION SYSTEM =====
+        function showCollection() {
+            const collectionScreen = document.getElementById('collection-screen');
+            const collectionGrid = document.getElementById('collection-grid');
+            const progressText = document.getElementById('progress-text');
+
+            // Calculate progress
+            const totalCards = cardDatabase.length;
+            const unlockedCount = game.unlockedCards.length;
+            progressText.textContent = `${unlockedCount}/${totalCards} (${Math.round(unlockedCount/totalCards*100)}%)`;
+
+            // Clear grid
+            collectionGrid.innerHTML = '';
+
+            // Populate grid with detailed cards
+            cardDatabase.forEach(card => {
+                const isUnlocked = game.unlockedCards.includes(card.id);
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'collection-card' + (isUnlocked ? '' : ' locked');
+
+                if (isUnlocked) {
+                    // Show full card details for unlocked cards
+                    cardDiv.innerHTML = `
+                        <div class="card-template tier-${card.rarity}">
+                            <div class="card-image-wrapper">
+                                <img src="${card.image}" alt="${card.name}"
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23${card.rarity === 'UR' ? 'FFD700' : card.rarity === 'SSR' ? '9400D3' : card.rarity === 'SR' ? '4169E1' : '808080'}%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-family=%22monospace%22%3E${card.name}%3C/text%3E%3C/svg%3E'">
+                                <div class="rarity-glow"></div>
+                            </div>
+                            <div class="rarity-badge">${card.rarity}</div>
+                            <div class="card-info">
+                                <div>
+                                    <h3 class="card-title">${card.title || card.name}</h3>
+                                    <p class="card-quote">${card.quote || '...'}</p>
+                                </div>
+                                <div class="perk-box">
+                                    <span class="perk-label">${card.perk?.label || '愛的憑證'}：</span>
+                                    <span class="perk-value">${card.perk?.value || '未定義'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Show locked card placeholder
+                    cardDiv.innerHTML = `
+                        <div class="card-template tier-${card.rarity}">
+                            <div class="card-image-wrapper">
+                                <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23333%22 width=%22400%22 height=%22300%22/%3E%3C/svg%3E" alt="Locked">
+                                <div class="rarity-glow"></div>
+                            </div>
+                            <div class="rarity-badge">???</div>
+                            <div class="card-info">
+                                <div>
+                                    <h3 class="card-title">???</h3>
+                                    <p class="card-quote">尚未解鎖</p>
+                                </div>
+                                <div class="perk-box">
+                                    <span class="perk-label">???</span>
+                                    <span class="perk-value">???</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                collectionGrid.appendChild(cardDiv);
+            });
+
+            collectionScreen.classList.add('active');
+        }
+
+        // ===== GRAND PRIZE SCREEN =====
+        function showGrandPrize() {
+            const prizeScreen = document.getElementById('prize-screen');
+            const prizeMessage = document.getElementById('prize-message');
+            const prizeClue = document.getElementById('prize-clue');
+
+            prizeMessage.innerHTML = `
+                <span class="heart">💝</span><br>
+                你贏得了我全部的愛！<br>
+                <span class="heart">💝</span>
+            `;
+
+            prizeClue.innerHTML = `
+                <strong>🎁 真實世界的寶藏線索：</strong><br>
+                「禮物就藏在你最喜歡坐的那個角落<br>
+                那個總是被你霸佔的位置旁邊...」<br>
+                <br>
+                <small>情人節快樂，我的寶貝 ❤️</small>
+            `;
+
+            prizeScreen.classList.add('active');
+
+            // Play special sound
+            playPrizeSound();
+        }
+
+        function playPrizeSound() {
+            if (audioContext.state === 'suspended') return;
+            // Triumphant fanfare
+            const notes = [261.63, 329.63, 392.00, 523.25]; // C, E, G, C
+            notes.forEach((freq, i) => {
+                setTimeout(() => {
+                    const osc = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioContext.destination);
+                    osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+                    gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    osc.start();
+                    osc.stop(audioContext.currentTime + 0.5);
+                }, i * 150);
+            });
+        }
+
         // ===== GAME LOGIC =====
         function updateGameSpeed() {
             // Increase speed based on elapsed time (every 10 seconds)
@@ -673,8 +1747,20 @@
 
             // Scoring
             if (ball.x < 0 || ball.x > canvas.width) {
-                if (ball.x < 0) game.aiScore++;
-                else { game.playerScore++; checkDifficulty(); }
+                if (ball.x < 0) {
+                    game.aiScore++;
+                } else {
+                    game.playerScore++;
+                    checkDifficulty();
+
+                    // NEW: Award tokens for scoring
+                    addTokens(1);
+
+                    // Bonus token for high-speed returns
+                    if (game.ballSpeedMultiplier >= 1.5) {
+                        addTokens(1); // +1 bonus token for epic plays
+                    }
+                }
                 playScoreSound();
                 updateScoreDisplay();
                 if (game.playerScore >= 10) winGame();
@@ -853,11 +1939,17 @@
         }
 
         // ===== START / INIT =====
-        window.onload = () => {
+        window.onload = async () => {
+            // Load card configuration first
+            await loadCardConfig();
+
             resizeCanvas();
             initPositions();
             render();
             setInterval(cycleMessage, 4000);
+
+            // Load saved game data
+            loadGameData();
         };
 
         // Mode selection buttons
@@ -888,6 +1980,88 @@
         document.getElementById('pause-btn').addEventListener('click', pauseGame);
         document.getElementById('continue-btn').addEventListener('click', continueGame);
         document.getElementById('restart-btn').addEventListener('click', restartGame);
+
+        // ===== LAYER SYSTEM EVENT LISTENERS =====
+
+        // Layer 1: Landing screen unlock button
+        document.getElementById('unlock-button').addEventListener('click', () => {
+            if (audioContext.state === 'suspended') audioContext.resume();
+
+            // Hide landing screen
+            document.getElementById('landing-screen').classList.add('hidden');
+
+            // Show game toolbar
+            document.getElementById('game-toolbar').classList.remove('hidden');
+
+            // Update layer state
+            game.currentLayer = 'GAME';
+
+            // Message area is already visible
+            messageArea.textContent = messages[0];
+        });
+
+        // Layer 2: Gacha button (open gacha screen)
+        document.getElementById('gacha-button').addEventListener('click', () => {
+            if (game.tokens < 5) return;
+
+            // Pause game if running
+            if (game.isRunning) {
+                pauseGame();
+            }
+
+            // Show gacha screen
+            document.getElementById('gacha-screen').classList.add('active');
+            game.currentLayer = 'GACHA';
+
+            // Reset gacha display
+            document.getElementById('gacha-card').classList.remove('show');
+        });
+
+        // Layer 3: Pull button (perform gacha)
+        document.getElementById('pull-button').addEventListener('click', () => {
+            if (game.tokens >= 5) {
+                const pullBtn = document.getElementById('pull-button');
+                pullBtn.disabled = true;
+
+                performGacha();
+
+                // Re-enable after animation
+                setTimeout(() => {
+                    pullBtn.disabled = false;
+                    updateGachaButton();
+                }, 3000);
+            }
+        });
+
+        // Close gacha screen
+        document.getElementById('close-gacha').addEventListener('click', () => {
+            document.getElementById('gacha-screen').classList.remove('active');
+            game.currentLayer = 'GAME';
+        });
+
+        // Layer 4: Collection button
+        document.getElementById('collection-button').addEventListener('click', () => {
+            // Pause game if running
+            if (game.isRunning) {
+                pauseGame();
+            }
+
+            showCollection();
+            game.currentLayer = 'COLLECTION';
+        });
+
+        // Close collection screen
+        document.getElementById('close-collection').addEventListener('click', () => {
+            document.getElementById('collection-screen').classList.remove('active');
+            game.currentLayer = 'GAME';
+        });
+
+        // Grand Prize: Continue playing button
+        document.getElementById('continue-playing').addEventListener('click', () => {
+            document.getElementById('prize-screen').classList.remove('active');
+            document.getElementById('gacha-screen').classList.remove('active');
+            game.currentLayer = 'GAME';
+        });
     </script>
 </body>
 </html>
