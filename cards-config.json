@@ -3,122 +3,92 @@
     {
       "id": "R1",
       "rarity": "R",
-      "name": "初次相遇",
-      "title": "「圖書館的那個午後」",
-      "quote": "你問我借了一支筆，從此我的心就借給了你。",
-      "image": "assets/cards/example.jpeg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "一個擁抱 (隨時兌換)"
-      }
+      "name": "Zootopia Duo",
+      "title": "「Fox & Bunny Mode」",
+      "attack1": "Sly Charm",
+      "attack2": "Carrot Tackle",
+      "image": "assets/cards/r_1.jpeg"
     },
     {
       "id": "R2",
       "rarity": "R",
-      "name": "溫暖微笑",
-      "title": "「早晨的陽光」",
-      "quote": "你的笑容比咖啡更能讓我清醒。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "早餐服務一次 (未兌換)"
-      }
+      "name": "Failed Lifter",
+      "title": "「Strength: 0」",
+      "attack1": "Weak Lift Attempt",
+      "attack2": "Embarrassed Laugh",
+      "image": "assets/cards/r_2.jpeg"
     },
     {
       "id": "R3",
       "rarity": "R",
-      "name": "日常時光",
-      "title": "「沙發上的週末」",
-      "quote": "什麼都不做，只是和你待在一起，就是最美好的時光。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "選電影權一次 (未兌換)"
-      }
+      "name": "BL Gamers",
+      "title": "「Boys Love Speedrun」",
+      "attack1": "Co-op Combo",
+      "attack2": "Bromance Boost",
+      "image": "assets/cards/r_3.jpg"
     },
     {
       "id": "R4",
       "rarity": "R",
-      "name": "甜蜜問候",
-      "title": "「深夜的訊息」",
-      "quote": "每次收到你的晚安，都捨不得睡覺。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "睡前故事一則 (未兌換)"
-      }
+      "name": "Ice Crashers",
+      "title": "「Double KO」",
+      "attack1": "Synchronized Fall",
+      "attack2": "Toddler Bump",
+      "image": "assets/cards/r_4.jpeg"
     },
     {
       "id": "SR1",
       "rarity": "SR",
-      "name": "心動瞬間",
-      "title": "「第一次牽手」",
-      "quote": "那天人很多，你說怕走散，然後握住了我的手。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "看電影約會一次 (未兌換)"
-      }
+      "name": "Chucky Twins",
+      "title": "「Horror Couple Goals」",
+      "attack1": "Creepy Giggle",
+      "attack2": "Knife Pose",
+      "image": "assets/cards/sr_1.jpeg"
     },
     {
       "id": "SR2",
       "rarity": "SR",
-      "name": "浪漫約會",
-      "title": "「海邊的日落」",
-      "quote": "夕陽很美，但我一直在看你。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "海邊約會一次 (未兌換)"
-      }
+      "name": "Lobster Devourers",
+      "title": "「Crustacean Destruction」",
+      "attack1": "Claw Crack",
+      "attack2": "Butter Splash",
+      "image": "assets/cards/sr_2.jpeg"
     },
     {
       "id": "SR3",
       "rarity": "SR",
-      "name": "深情告白",
-      "title": "「那句我愛你」",
-      "quote": "說出口的那一刻，整個世界都在發光。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "想要的禮物一份 (未兌換)"
-      }
+      "name": "Pocky Challengers",
+      "title": "「Snack Battle Royale」",
+      "attack1": "Chocolate Bite",
+      "attack2": "Close-Up Crunch",
+      "image": "assets/cards/sr_3.jpeg"
     },
     {
       "id": "SSR1",
       "rarity": "SSR",
-      "name": "永恆誓言",
-      "title": "「雨天下的共傘」",
-      "quote": "那天雨很大，但靠在你肩膀上好安心。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "按摩 30 分鐘券 (未兌換)"
-      }
+      "name": "Cheek Smoocher",
+      "title": "「Critical Hit Kiss」",
+      "attack1": "Surprise Smooch",
+      "attack2": "Affection Overload",
+      "image": "assets/cards/ssr_1.jpeg"
     },
     {
       "id": "SSR2",
       "rarity": "SSR",
-      "name": "星空之約",
-      "title": "「屋頂上的流星」",
-      "quote": "你說要和我一起看一千顆流星，我們才看了三顆就睡著了。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "愛的憑證",
-        "value": "週末旅行一次 (未兌換)"
-      }
+      "name": "Snow Angel Master",
+      "title": "「Winter Magic」",
+      "attack1": "Snow Flap",
+      "attack2": "Frozen Joy",
+      "image": "assets/cards/ssr_2.jpg"
     },
     {
       "id": "UR1",
       "rarity": "UR",
-      "name": "摯愛之心",
-      "title": "「永遠的你和我」",
-      "quote": "在所有平行宇宙中，我都只想找到你。",
-      "image": "assets/cards/example.svg",
-      "perk": {
-        "label": "終極大獎",
-        "value": "真實世界的神秘禮物 ✨"
-      }
+      "name": "Kitty Light Duo",
+      "title": "「Eternal Glow」",
+      "attack1": "Radiant Embrace",
+      "attack2": "Infinite Love Beam",
+      "image": "assets/cards/ur_1.jpg"
     }
   ],
   "rarityConfig": {
