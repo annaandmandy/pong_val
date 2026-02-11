@@ -2347,9 +2347,12 @@
             const playerLabel = game.twoPlayerMode ? "Player 1" : "You";
             const opponentLabel = game.twoPlayerMode ? "Player 2" : "AI";
 
-            // Update old score display (hidden)
-            document.getElementById('score').innerHTML =
-                `${playerLabel}: <span id="player-score">${game.playerScore}</span> | ${opponentLabel}: <span id="ai-score">${game.aiScore}</span>`;
+            // Update score display with new structure
+            const scoreDiv = document.getElementById('score');
+            scoreDiv.innerHTML = `
+                <span>${playerLabel}: <span id="player-score">${game.playerScore}</span></span>
+                <span>${opponentLabel}: <span id="ai-score">${game.aiScore}</span></span>
+            `;
 
             // Update new score labels
             document.querySelector('#player-score-display .score-label').textContent = playerLabel;
