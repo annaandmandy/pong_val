@@ -12,15 +12,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #fff5f7; /* Soft pink background for glassmorphism */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff0f5 0%, #ffe4ed 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            color: #ff006e;
+            color: #d4748e;
             position: fixed;
             width: 100%;
             height: 100%;
@@ -28,15 +28,7 @@
         }
 
         #message-area {
-            position: absolute;
-            top: 70px;
-            text-align: center;
-            font-size: 1.2em;
-            color: #ff69b4;
-            animation: pulse 2s ease-in-out infinite;
-            z-index: 10;
-            max-width: 90%;
-            padding: 0 20px;
+            display: none;
         }
 
         @keyframes pulse {
@@ -46,31 +38,45 @@
 
         #game-container {
             position: relative;
-            box-shadow: 0 4px 20px rgba(255, 0, 110, 0.3);
-            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.15);
+            border-radius: 16px;
             overflow: hidden;
             touch-action: none;
         }
 
         canvas {
             display: block;
-            background: rgba(0, 0, 0, 0.8);
-            border: 3px solid #ff006e;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 16px;
             min-width: 600px;
             min-height: 400px;
             touch-action: none;
         }
 
         #score {
-            position: absolute;
-            top: 60px;
+            position: fixed;
+            top: 40px;
+            left: 0;
+            right: 0;
             width: 100%;
-            text-align: center;
-            font-size: 2em;
-            color: #ff006e;
-            z-index: 10;
-            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 600px;
+            z-index: 15;
+            font-size: 1.2em;
+            color: #d4748e;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        #score > span {
+            pointer-events: none;
+        }
+
+        .score-display {
+            display: none;
         }
 
         #win-screen {
@@ -79,7 +85,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(255, 240, 245, 0.98);
             display: none;
             justify-content: center;
             align-items: center;
@@ -94,10 +100,11 @@
 
         #win-content {
             text-align: center;
-            padding: 40px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #ff006e, #8b00ff);
-            box-shadow: 0 0 60px rgba(255, 0, 110, 0.9);
+            padding: 56px 48px;
+            border-radius: 24px;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 12px 48px rgba(255, 182, 193, 0.2);
             animation: scaleIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
@@ -107,16 +114,17 @@
         }
 
         #win-content h1 {
-            font-size: 3em;
-            color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #d4748e;
+            margin-bottom: 24px;
+            font-weight: 600;
         }
 
         #win-content p {
-            font-size: 1.5em;
-            color: #ffe0f0;
-            line-height: 1.6;
+            font-size: 1.2em;
+            color: #e89bb5;
+            line-height: 1.7;
+            font-weight: 400;
         }
 
         .heart {
@@ -150,26 +158,28 @@
         }
 
         .control-btn {
-            padding: 10px 20px;
-            font-size: 1em;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(135deg, #ff006e, #8b00ff);
-            border: 2px solid #ff69b4;
-            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 0.95em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 0 15px rgba(255, 0, 110, 0.5);
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.1);
         }
 
         .control-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 0, 110, 0.8);
+            background: #fff5f8;
+            border-color: rgba(255, 182, 193, 0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.15);
         }
 
         .control-btn:active {
-            transform: scale(0.95);
+            transform: translateY(0);
         }
 
         .control-btn.hidden {
@@ -177,8 +187,8 @@
         }
 
         .control-btn.secondary {
-            background: linear-gradient(135deg, #8b00ff, #4a148c);
-            border-color: #9c27b0;
+            background: #fff5f8;
+            border-color: rgba(255, 182, 193, 0.4);
         }
 
         #start-overlay {
@@ -207,55 +217,52 @@
         }
 
         .mode-btn {
-            padding: 12px 24px;
-            font-size: 1.2em;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: white;
-            background: rgba(255, 0, 110, 0.3);
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
+            padding: 16px 32px;
+            font-size: 1.1em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .mode-btn.selected {
-            background: rgba(255, 0, 110, 0.6);
-            border-color: #ff006e;
-            transform: scale(1.05);
+            background: #fff0f5;
+            border-color: #ffb6c1;
+            color: #c95d7a;
         }
 
         .mode-btn:hover {
-            transform: scale(1.05);
-            background: rgba(255, 0, 110, 0.4);
+            background: #fff5f8;
+            border-color: rgba(255, 182, 193, 0.5);
         }
 
         #start-button {
-            padding: 20px 40px;
-            font-size: 1.8em;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: white;
-            background: rgba(255, 0, 110, 0.5);
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
+            padding: 18px 48px;
+            font-size: 1.3em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.3s ease;
-            animation: glow 2s ease-in-out infinite;
+            box-shadow: 0 4px 16px rgba(255, 182, 193, 0.15);
         }
 
         #start-button:hover {
-            transform: scale(1.05);
-            background: rgba(255, 0, 110, 0.7);
+            background: #fff5f8;
+            border-color: #ffb6c1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 182, 193, 0.2);
         }
 
         #start-button:active {
-            transform: scale(0.95);
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 30px rgba(255, 0, 110, 0.8); }
-            50% { box-shadow: 0 0 50px rgba(255, 0, 110, 1); }
+            transform: translateY(0);
         }
 
         .corner-image {
@@ -334,31 +341,35 @@
 
         #landing-message {
             margin-top: 40px;
-            font-size: 1.5em;
-            color: #ff69b4;
+            font-size: 1.3em;
+            color: #e89bb5;
             text-align: center;
             animation: pulse 2s ease-in-out infinite;
             max-width: 80%;
+            font-weight: 400;
+            line-height: 1.6;
         }
 
         #unlock-button {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 1.3em;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: white;
-            background: rgba(255, 0, 110, 0.4);
-            border: 2px solid #ff69b4;
-            border-radius: 8px;
+            margin-top: 32px;
+            padding: 14px 36px;
+            font-size: 1.1em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            border-radius: 24px;
             cursor: pointer;
             transition: all 0.3s ease;
-            animation: glow 2s ease-in-out infinite;
+            box-shadow: 0 4px 16px rgba(255, 182, 193, 0.15);
         }
 
         #unlock-button:hover {
-            transform: scale(1.05);
-            background: rgba(255, 0, 110, 0.6);
+            background: #fff5f8;
+            border-color: #ffb6c1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 182, 193, 0.2);
         }
 
         /* ===== LAYER 2: TOKEN SYSTEM ===== */
@@ -370,12 +381,13 @@
             transform: translateX(-50%);
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
             z-index: 20;
-            background: rgba(0, 0, 0, 0.85);
+            background: white;
             padding: 12px 24px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            box-shadow: 0 4px 16px rgba(255, 182, 193, 0.12);
         }
 
         #game-toolbar.hidden {
@@ -389,48 +401,46 @@
         }
 
         #token-icon {
-            width: 28px;
-            height: 28px;
-            background: #ffd700;
-            border-radius: 50%;
+            width: 24px;
+            height: 24px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1em;
+            font-size: 0.9em;
         }
 
         #token-count {
-            font-size: 1.3em;
-            color: #ffd700;
-            font-weight: bold;
+            font-size: 1.1em;
+            color: #d4748e;
+            font-weight: 600;
         }
 
         #toolbar-divider {
             width: 1px;
-            height: 24px;
-            background: rgba(255, 105, 180, 0.3);
+            height: 20px;
+            background: rgba(255, 182, 193, 0.2);
         }
 
         #gacha-button {
-            padding: 8px 16px;
-            font-size: 0.95em;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: white;
-            background: rgba(255, 0, 110, 0.3);
-            border: 1px solid rgba(255, 105, 180, 0.6);
-            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 0.9em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: #fff5f8;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         #gacha-button:hover:not(:disabled) {
-            background: rgba(255, 0, 110, 0.5);
-            border-color: rgba(255, 105, 180, 0.9);
+            background: #fff0f5;
+            border-color: #ffb6c1;
         }
 
         #gacha-button:disabled {
-            opacity: 0.4;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
@@ -441,7 +451,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(255, 240, 245, 0.98);
             display: none;
             justify-content: center;
             align-items: center;
@@ -457,16 +467,15 @@
             position: relative;
             width: 900px;
             height: auto;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 48px;
-            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.1);
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            border-radius: 32px;
+            box-shadow: 0 12px 48px rgba(255, 182, 193, 0.12);
             display: flex;
             flex-direction: row;
             align-items: center;
-            padding: 48px;
-            gap: 40px;
+            padding: 48px 56px;
+            gap: 48px;
         }
 
         /* Left Side Info Panel */
@@ -479,29 +488,32 @@
         }
 
         .experience-badge {
-            background: #ffe4ed;
-            color: #ff4d94;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 900;
-            font-size: 12px;
-            letter-spacing: 1px;
+            background: #fff0f5;
+            color: #e89bb5;
+            padding: 6px 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 0.5px;
             margin-bottom: 20px;
         }
 
         #gacha-title {
-            font-size: 48px;
-            color: #4a001a;
-            margin: 20px 0;
-            font-family: Georgia, serif;
-            line-height: 1.2;
+            font-size: 42px;
+            color: #d4748e;
+            margin: 16px 0 20px 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', serif;
+            line-height: 1.3;
+            font-weight: 600;
         }
 
         .gacha-subtitle {
-            color: #ff99bb;
-            margin-bottom: 40px;
+            color: #e89bb5;
+            margin-bottom: 36px;
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.65;
+            font-weight: 400;
         }
 
         .balance-section {
@@ -511,32 +523,33 @@
         }
 
         .balance-info small {
-            color: #ffb3cc;
-            font-weight: bold;
+            color: #e89bb5;
+            font-weight: 500;
             display: block;
             font-size: 11px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
         }
 
         .balance-amount {
-            font-size: 32px;
-            font-weight: 900;
-            color: #d4a017;
+            font-size: 28px;
+            font-weight: 600;
+            color: #d4748e;
         }
 
         .balance-divider {
             width: 1px;
-            height: 50px;
-            background: #ffe4ed;
+            height: 48px;
+            background: rgba(255, 182, 193, 0.2);
         }
 
         #gacha-display {
             width: 320px;
             height: 500px;
-            background: linear-gradient(to bottom, #ff4d94, #e6005c);
+            background: linear-gradient(to bottom, #ffb6c1, #ffb6c1);
             border-radius: 140px 140px 60px 60px;
-            border: 12px solid white;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            box-shadow: 0 8px 24px rgba(255, 182, 193, 0.15);
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -550,47 +563,50 @@
         .capsule-tank {
             height: 250px;
             margin: 20px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.5);
             border-radius: 120px;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             padding: 20px;
             justify-content: center;
             align-items: flex-start;
-            border: 4px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.6);
             overflow: hidden;
         }
 
         .capsule {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            box-shadow: inset -3px -3px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
             flex-shrink: 0;
+            opacity: 0.9;
         }
 
         /* Crank handle */
         #crank-handle {
-            width: 80px;
-            height: 80px;
+            width: 76px;
+            height: 76px;
             background: white;
             border-radius: 50%;
             margin: 20px auto;
-            border: 6px solid #b30047;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.15);
             position: relative;
             cursor: pointer;
             transition: transform 1s ease-in-out;
         }
 
         .crank-line {
-            width: 60px;
-            height: 6px;
-            background: #b30047;
+            width: 56px;
+            height: 3px;
+            background: #ffb6c1;
             position: absolute;
             top: 50%;
             left: 10px;
-            margin-top: -3px;
+            margin-top: -1.5px;
+            border-radius: 2px;
         }
 
         .crank-line:first-child {
@@ -603,12 +619,12 @@
 
         /* Exit ball slot */
         .exit-slot {
-            width: 100px;
-            height: 60px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 15px;
+            width: 96px;
+            height: 56px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 16px;
             margin: 0 auto;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.5);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -616,11 +632,12 @@
 
         #exit-ball {
             display: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: white;
             border-radius: 50%;
             animation: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
         @keyframes ballDrop {
@@ -639,28 +656,40 @@
             75% { transform: translateX(10px) rotate(2deg); }
         }
 
-        #gacha-card {
+        #gacha-card-wrapper {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            width: 400px;
-            height: 600px;
-            background: white;
-            border-radius: 20px;
+            z-index: 2500;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             display: none;
+        }
+
+        #gacha-card-wrapper.show {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #gacha-card-wrapper .close-popup-btn {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+        }
+
+        #gacha-card {
+            width: 450px;
+            height: 650px;
+            background: white;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 0;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            z-index: 2000;
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        #gacha-card.show {
-            display: flex;
-            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 0 12px 48px rgba(255, 182, 193, 0.2);
+            overflow: hidden;
         }
 
         #card-image {
@@ -847,22 +876,24 @@
         }
 
         #pull-button {
-            padding: 12px 24px;
-            font-size: 16px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: 700;
-            color: white;
-            background: linear-gradient(135deg, #ff4d94, #e6005c);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 12px;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 77, 148, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.12);
+            transition: all 0.2s ease;
         }
 
         #pull-button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 77, 148, 0.5);
+            background: #fff5f8;
+            border-color: #ffb6c1;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.18);
         }
 
         #pull-button:disabled {
@@ -872,40 +903,46 @@
 
         #close-gacha {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 1em;
-            font-family: 'Courier New', monospace;
-            color: white;
-            background: rgba(255, 0, 110, 0.5);
-            border: 2px solid #ff69b4;
-            border-radius: 8px;
+            top: 24px;
+            right: 24px;
+            padding: 8px 12px;
+            font-size: 1.2em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         #close-gacha:hover {
-            background: rgba(255, 0, 110, 0.8);
+            background: #fff5f8;
+            border-color: #ffb6c1;
         }
 
         /* ===== LAYER 4: COLLECTION GALLERY ===== */
         #collection-button {
-            padding: 8px 16px;
-            font-size: 0.95em;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: white;
-            background: rgba(255, 0, 110, 0.2);
-            border: 1px solid rgba(255, 105, 180, 0.5);
-            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 0.9em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: #fff5f8;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         #collection-button:hover {
-            background: rgba(255, 0, 110, 0.3);
-            border-color: rgba(255, 105, 180, 0.8);
+            background: #fff0f5;
+            border-color: #ffb6c1;
         }
 
         #collection-screen {
@@ -914,7 +951,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(255, 240, 245, 0.98);
             display: none;
             justify-content: center;
             align-items: center;
@@ -928,53 +965,58 @@
 
         #collection-content {
             width: 90%;
-            max-width: 1000px;
-            height: 80%;
-            background: linear-gradient(135deg, #2d1b3d 0%, #1a0a1e 100%);
-            border: 5px solid #ff69b4;
-            border-radius: 30px;
-            box-shadow: 0 0 60px rgba(255, 0, 110, 0.9);
-            padding: 30px;
+            max-width: 1100px;
+            height: auto;
+            max-height: 85%;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            border-radius: 32px;
+            box-shadow: 0 12px 48px rgba(255, 182, 193, 0.15);
+            padding: 48px 56px 56px 56px;
             overflow-y: auto;
             position: relative;
         }
 
         #collection-header {
-            font-size: 2.5em;
-            color: #ff69b4;
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
-            margin-bottom: 20px;
+            font-size: 2em;
+            color: #d4748e;
+            margin-bottom: 16px;
             text-align: center;
+            font-weight: 600;
         }
 
         #collection-progress {
-            font-size: 1.3em;
-            color: #ffd700;
+            font-size: 1.1em;
+            color: #e89bb5;
             text-align: center;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            margin-bottom: 36px;
+            font-weight: 500;
         }
 
         #collection-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 20px;
-            padding: 20px 0;
+            padding: 8px;
+            max-width: 100%;
         }
 
         .collection-card {
-            background: rgba(0, 0, 0, 0.5);
-            border: 3px solid #ff69b4;
-            border-radius: 15px;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            border-radius: 12px;
             overflow: hidden;
             transition: all 0.3s ease;
             cursor: pointer;
             aspect-ratio: 2/3;
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.08);
+            height: 280px;
         }
 
         .collection-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 0, 110, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 182, 193, 0.15);
+            border-color: #ffb6c1;
         }
 
         .collection-card.locked {
@@ -993,25 +1035,35 @@
         }
 
         .collection-card .card-image-wrapper {
-            height: 55%;
+            height: 60%;
         }
 
         .collection-card .card-title {
-            font-size: 1.1em;
+            font-size: 0.9em;
+            margin-bottom: 6px;
         }
 
         .collection-card .card-quote {
-            font-size: 0.85em;
+            font-size: 0.75em;
+            margin-bottom: 8px;
+            line-height: 1.3;
         }
 
         .collection-card .perk-box {
-            font-size: 0.8em;
-            padding: 8px;
+            font-size: 0.7em;
+            padding: 6px;
+            gap: 3px;
         }
 
         .collection-card .rarity-badge {
-            font-size: 1em;
-            padding: 3px 10px;
+            font-size: 0.8em;
+            padding: 3px 8px;
+            top: 6px;
+            right: 6px;
+        }
+
+        .collection-card .card-info {
+            padding: 10px;
         }
 
         /* Locked card overlay */
@@ -1025,30 +1077,91 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 5em;
-            color: #666;
+            font-size: 3em;
+            color: #ccc;
             font-weight: bold;
             z-index: 100;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Card detail popup */
+        #card-detail-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 245, 0.98);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        #card-detail-popup.active {
+            display: flex;
+        }
+
+        .popup-wrapper {
+            position: relative;
+        }
+
+        #card-detail-content {
+            width: 450px;
+            height: 650px;
+            background: white;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 12px 48px rgba(255, 182, 193, 0.2);
+            overflow: hidden;
+        }
+
+        .close-popup-btn {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.3em;
+            color: #d4748e;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.15);
+        }
+
+        .close-popup-btn:hover {
+            background: #fff5f8;
+            border-color: #ffb6c1;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.25);
         }
 
         #close-collection {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 1em;
-            font-family: 'Courier New', monospace;
-            color: white;
-            background: rgba(255, 0, 110, 0.5);
-            border: 2px solid #ff69b4;
-            border-radius: 8px;
+            top: 24px;
+            right: 24px;
+            padding: 8px 20px;
+            font-size: 0.95em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         #close-collection:hover {
-            background: rgba(255, 0, 110, 0.8);
+            background: #fff5f8;
+            border-color: #ffb6c1;
         }
 
         /* ===== GRAND PRIZE SCREEN ===== */
@@ -1058,7 +1171,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
+            background: rgba(255, 240, 245, 0.98);
             display: none;
             justify-content: center;
             align-items: center;
@@ -1072,66 +1185,73 @@
 
         #prize-content {
             text-align: center;
-            padding: 50px;
-            max-width: 800px;
+            padding: 56px 48px;
+            max-width: 700px;
+            background: white;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            box-shadow: 0 12px 48px rgba(255, 182, 193, 0.15);
             animation: scaleIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         #prize-animation {
-            width: 300px;
-            height: 300px;
-            margin: 0 auto 30px;
-            background: radial-gradient(circle, #ffd700, #ff006e);
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 32px;
+            background: linear-gradient(135deg, #fff0f5, #ffe4ed);
             border-radius: 50%;
+            border: 1px solid rgba(255, 182, 193, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
             animation: prizeGlow 2s ease-in-out infinite;
-            box-shadow: 0 0 100px rgba(255, 215, 0, 0.9);
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.2);
         }
 
         @keyframes prizeGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 100px rgba(255, 215, 0, 0.9); }
-            50% { transform: scale(1.1); box-shadow: 0 0 150px rgba(255, 215, 0, 1); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         #prize-message {
-            font-size: 2.5em;
-            color: #ffd700;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
-            margin-bottom: 30px;
+            font-size: 2em;
+            color: #d4748e;
+            margin-bottom: 24px;
             line-height: 1.5;
+            font-weight: 600;
         }
 
         #prize-clue {
-            font-size: 1.5em;
-            color: #ff69b4;
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 0, 110, 0.1);
-            border: 2px solid #ff69b4;
-            border-radius: 15px;
+            font-size: 1.1em;
+            color: #e89bb5;
+            margin-top: 24px;
+            padding: 24px;
+            background: #fff5f8;
+            border: 1px solid rgba(255, 182, 193, 0.25);
+            border-radius: 20px;
+            line-height: 1.7;
         }
 
         #continue-playing {
-            margin-top: 40px;
-            padding: 15px 40px;
-            font-size: 1.2em;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(135deg, #ff006e, #8b00ff);
-            border: 3px solid #ff69b4;
-            border-radius: 12px;
+            margin-top: 32px;
+            padding: 14px 36px;
+            font-size: 1em;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            color: #d4748e;
+            background: white;
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8);
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.12);
             transition: all 0.3s ease;
         }
 
         #continue-playing:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px rgba(255, 0, 110, 1);
+            background: #fff5f8;
+            border-color: #ffb6c1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.18);
         }
 
         @media (max-width: 768px) {
@@ -1186,8 +1306,19 @@
     </div>
 
     <div id="message-area">Loading your Valentine's gift...</div>
-    <div id="score">You: <span id="player-score">0</span> | AI: <span id="ai-score">0</span></div>
+    <div id="score">
+        <span>You: <span id="player-score">0</span></span>
+        <span>AI: <span id="ai-score">0</span></span>
+    </div>
     <div id="game-container">
+        <div class="score-display" id="player-score-display">
+            <span class="score-label">You</span>
+            <span id="player-score-number">0</span>
+        </div>
+        <div class="score-display" id="ai-score-display">
+            <span class="score-label">AI</span>
+            <span id="ai-score-number">0</span>
+        </div>
         <canvas id="pongCanvas"></canvas>
         <div id="start-overlay">
             <div id="mode-selection">
@@ -1244,13 +1375,14 @@
                 <div class="exit-slot">
                     <div id="exit-ball"></div>
                 </div>
-
-                <div id="gacha-card">
-                    <img id="card-image" src="" alt="Card">
-                    <div id="card-rarity"></div>
-                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Gacha Card Popup Wrapper -->
+    <div id="gacha-card-wrapper">
+        <button class="close-popup-btn" id="close-gacha-card">✕</button>
+        <div id="gacha-card"></div>
     </div>
 
     <!-- LAYER 4: Collection Gallery -->
@@ -1260,6 +1392,16 @@
             <div id="collection-header">我的收藏 ❤️</div>
             <div id="collection-progress">收集進度: <span id="progress-text">0/0</span></div>
             <div id="collection-grid"></div>
+        </div>
+    </div>
+
+    <!-- Card Detail Popup -->
+    <div id="card-detail-popup">
+        <div class="popup-wrapper">
+            <button class="close-popup-btn" id="close-card-detail">✕</button>
+            <div id="card-detail-content">
+                <!-- Card content will be filled by JavaScript -->
+            </div>
         </div>
     </div>
 
@@ -1713,7 +1855,8 @@
         function generateCapsules() {
             const tank = document.getElementById('capsule-tank');
             tank.innerHTML = '';
-            const colors = ['#ff6b9d', '#ffd93d', '#6bcf7f', '#4ecdc4', '#a5d8ff', '#ffadad'];
+            // 柔和的粉色系色調
+            const colors = ['#ffc2d4', '#ffb3c6', '#ffd4e5', '#ffe4f0', '#fff0f5', '#ffdde8'];
 
             for (let i = 0; i < 24; i++) {
                 const capsule = document.createElement('div');
@@ -1817,6 +1960,7 @@
                 // Show card after animation
                 setTimeout(() => {
                     // Create detailed card template
+                    const wrapper = document.getElementById('gacha-card-wrapper');
                     cardElement.innerHTML = `
                         <div class="card-template tier-${card.rarity}">
                             <div class="card-image-wrapper">
@@ -1838,7 +1982,13 @@
                         </div>
                     `;
 
-                    cardElement.classList.add('show');
+                    wrapper.classList.add('show');
+
+                    // Add close button event listener
+                    const closeBtn = document.getElementById('close-gacha-card');
+                    closeBtn.onclick = () => {
+                        wrapper.classList.remove('show');
+                    };
 
                     // Check if UR - show grand prize screen
                     if (card.rarity === 'UR' && !document.getElementById('prize-screen').classList.contains('active')) {
@@ -1892,12 +2042,17 @@
                             </div>
                         </div>
                     `;
+
+                    // Add click event to show card detail popup
+                    cardDiv.addEventListener('click', () => {
+                        showCardDetail(card);
+                    });
                 } else {
                     // Show locked card placeholder
                     cardDiv.innerHTML = `
                         <div class="card-template tier-${card.rarity}">
                             <div class="card-image-wrapper">
-                                <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23333%22 width=%22400%22 height=%22300%22/%3E%3C/svg%3E" alt="Locked">
+                                <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23eee%22 width=%22400%22 height=%22300%22/%3E%3C/svg%3E" alt="Locked">
                                 <div class="rarity-glow"></div>
                             </div>
                             <div class="rarity-badge">???</div>
@@ -1919,6 +2074,41 @@
             });
 
             collectionScreen.classList.add('active');
+        }
+
+        // Show card detail popup
+        function showCardDetail(card) {
+            const popup = document.getElementById('card-detail-popup');
+            const content = document.getElementById('card-detail-content');
+
+            content.innerHTML = `
+                <div class="card-template tier-${card.rarity}">
+                    <div class="card-image-wrapper">
+                        <img src="${card.image}" alt="${card.name}"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%23${card.rarity === 'UR' ? 'FFD700' : card.rarity === 'SSR' ? '9400D3' : card.rarity === 'SR' ? '4169E1' : '808080'}%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-family=%22monospace%22%3E${card.name}%3C/text%3E%3C/svg%3E'">
+                        <div class="rarity-glow"></div>
+                    </div>
+                    <div class="rarity-badge">${card.rarity}</div>
+                    <div class="card-info">
+                        <div>
+                            <h3 class="card-title">${card.title || card.name}</h3>
+                            <p class="card-quote">${card.quote || '...'}</p>
+                        </div>
+                        <div class="perk-box">
+                            <span class="perk-label">${card.perk?.label || '愛的憑證'}：</span>
+                            <span class="perk-value">${card.perk?.value || '未定義'}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            popup.classList.add('active');
+
+            // Add close event
+            const closeBtn = document.getElementById('close-card-detail');
+            closeBtn.onclick = () => {
+                popup.classList.remove('active');
+            };
         }
 
         // ===== GRAND PRIZE SCREEN =====
@@ -2144,15 +2334,26 @@
         }
 
         function updateScoreDisplay() {
+            // Update old score display (hidden)
             document.getElementById('player-score').textContent = game.playerScore;
             document.getElementById('ai-score').textContent = game.aiScore;
+
+            // Update new score displays
+            document.getElementById('player-score-number').textContent = game.playerScore;
+            document.getElementById('ai-score-number').textContent = game.aiScore;
         }
 
         function updateScoreLabels() {
             const playerLabel = game.twoPlayerMode ? "Player 1" : "You";
             const opponentLabel = game.twoPlayerMode ? "Player 2" : "AI";
+
+            // Update old score display (hidden)
             document.getElementById('score').innerHTML =
                 `${playerLabel}: <span id="player-score">${game.playerScore}</span> | ${opponentLabel}: <span id="ai-score">${game.aiScore}</span>`;
+
+            // Update new score labels
+            document.querySelector('#player-score-display .score-label').textContent = playerLabel;
+            document.querySelector('#ai-score-display .score-label').textContent = opponentLabel;
         }
 
         function winGame() {
@@ -2276,15 +2477,15 @@
         // ===== RENDERING =====
         function drawBall(x, y) {
             if (heartImageLoaded) {
-                // Draw heart image
-                const size = ball.radius * 3; // Make it visible
+                // Draw heart image with soft pink glow
+                const size = ball.radius * 3;
                 ctx.save();
-                ctx.shadowBlur = 20;
-                ctx.shadowColor = "#ff006e";
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = "#ffb6c1";
                 ctx.drawImage(heartImage, x - size / 2, y - size / 2, size, size);
                 ctx.restore();
             } else {
-                // Fallback: draw heart shape if image not loaded
+                // Fallback: draw heart shape with soft pink
                 const size = ball.radius / 3;
                 ctx.save();
                 ctx.translate(x, y);
@@ -2295,9 +2496,9 @@
                 ctx.bezierCurveTo(-1, 0.7, -0.5, 1, 0, 1.5);
                 ctx.bezierCurveTo(0.5, 1, 1, 0.7, 1, 0.3);
                 ctx.bezierCurveTo(1, -0.3, 0.5, -0.5, 0, 0);
-                ctx.fillStyle = "#ff006e";
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = "#ff006e";
+                ctx.fillStyle = "#ffb6c1";
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = "#ffb6c1";
                 ctx.fill();
                 ctx.restore();
             }
@@ -2310,22 +2511,24 @@
             const w = paddle.width || 10;
             const h = paddle.height || 100;
 
-            const gradient = ctx.createLinearGradient(x, 0, x + w, 0);
-            gradient.addColorStop(0, isPlayer ? '#ff006e' : '#8b00ff');
-            gradient.addColorStop(1, '#ff69b4');
-            ctx.fillStyle = gradient;
+            // Soft pink gradient for both paddles
+            ctx.fillStyle = isPlayer ? '#ffb6c1' : '#ffc2d4';
             ctx.fillRect(x, y, w, h);
+
+            // Subtle rounded edges effect
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = 'rgba(255, 182, 193, 0.3)';
         }
 
         function render() {
-            // Clear with fade effect for motion blur
-            ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+            // Clear with fade effect for motion blur (soft white)
+            ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw center line (professional court marking)
-            ctx.strokeStyle = "rgba(255, 0, 110, 0.2)";
-            ctx.lineWidth = 2;
-            ctx.setLineDash([10, 10]);
+            // Draw center line (soft pink)
+            ctx.strokeStyle = "rgba(255, 182, 193, 0.25)";
+            ctx.lineWidth = 1;
+            ctx.setLineDash([8, 8]);
             ctx.beginPath();
             ctx.moveTo(canvas.width / 2, 0);
             ctx.lineTo(canvas.width / 2, canvas.height);
@@ -2340,8 +2543,8 @@
             if (game.ballFrozen) {
                 const timeLeft = Math.ceil((1500 - (Date.now() - game.ballFreezeTime)) / 1000);
                 if (timeLeft > 0) {
-                    ctx.fillStyle = "rgba(255, 105, 180, 0.8)";
-                    ctx.font = "bold 48px 'Courier New'";
+                    ctx.fillStyle = "#e89bb5";
+                    ctx.font = "500 42px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
                     ctx.textAlign = "center";
                     ctx.fillText(timeLeft, canvas.width / 2, canvas.height / 2 - 40);
                 }
@@ -2372,7 +2575,6 @@
             resizeCanvas();
             initPositions();
             render();
-            setInterval(cycleMessage, 4000);
 
             // Load saved game data
             loadGameData();
@@ -2423,8 +2625,6 @@
             // Update layer state
             game.currentLayer = 'GAME';
 
-            // Message area is already visible
-            messageArea.textContent = messages[0];
         });
 
         // Layer 2: Gacha button (open gacha screen)
