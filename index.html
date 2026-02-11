@@ -176,6 +176,11 @@
             display: none;
         }
 
+        .control-btn.secondary {
+            background: linear-gradient(135deg, #8b00ff, #4a148c);
+            border-color: #9c27b0;
+        }
+
         #start-overlay {
             position: absolute;
             top: 0;
@@ -1195,6 +1200,7 @@
     <div id="instructions">Controls: Player 1 (W/S) | Player 2 (Arrow Keys) | Mobile: Drag paddle</div>
 
     <div id="game-controls">
+        <button id="change-mode-btn" class="control-btn secondary hidden">Change Mode</button>
         <button id="pause-btn" class="control-btn hidden">Pause</button>
         <button id="continue-btn" class="control-btn hidden">Continue</button>
         <button id="restart-btn" class="control-btn hidden">Restart</button>
@@ -1387,7 +1393,7 @@
             vy: 2,
             baseSpeed: 4,
             maxSpeed: 10,
-            speedIncrease: 0.15, // Speed increase per hit
+            speedIncrease: 0.3, // Speed increase per hit (increased from 0.15 for faster acceleration)
             trail: [],
             lastHitPaddle: null // Track last paddle hit for spin
         };
@@ -1590,8 +1596,8 @@
                     paddle.ai.lastReactionUpdate = currentTime;
 
                     // Ball is moving towards AI - predict intercept point
-                    const timeToReach = (paddle.ai.x - ball.x) / (ball.vx * game.ballSpeedMultiplier);
-                    let predictedY = ball.y + (ball.vy * game.ballSpeedMultiplier * timeToReach);
+                    const timeToReach = (paddle.ai.x - ball.x) / ball.vx;
+                    let predictedY = ball.y + (ball.vy * timeToReach);
 
                     // Account for wall bounces
                     let bounces = 0;
@@ -1962,13 +1968,11 @@
 
         // ===== GAME LOGIC =====
         function updateGameSpeed() {
-            // Increase speed based on elapsed time (every 10 seconds)
-            // When paused, pausedTime stores elapsed time so timer doesn't advance
-            game.elapsedTime = game.pausedTime || (Date.now() - game.startTime) / 1000;
-            const timeMultiplier = 1 + (Math.floor(game.elapsedTime / 10) * 0.1);
-            game.ballSpeedMultiplier = timeMultiplier;
+            // NOTE: Speed multiplier is now handled per-rally via ball.speedIncrease
+            // This function only updates AI difficulty over game time
 
             // Gradually increase AI difficulty over time
+            game.elapsedTime = game.pausedTime || (Date.now() - game.startTime) / 1000;
             game.aiReactionSpeed = Math.min(0.95, 0.85 + (game.elapsedTime / 120));
         }
 
@@ -1984,8 +1988,9 @@
                 }
             }
 
-            ball.x += ball.vx * game.ballSpeedMultiplier;
-            ball.y += ball.vy * game.ballSpeedMultiplier;
+            // Ball speed is now controlled by vx/vy directly (increases per paddle hit)
+            ball.x += ball.vx;
+            ball.y += ball.vy;
 
             // Wall bounces - perfect elastic collision
             if (ball.y - ball.radius < 0) {
@@ -2172,12 +2177,14 @@
 
         // ===== GAME CONTROLS =====
         function showControls() {
+            document.getElementById('change-mode-btn').classList.remove('hidden');
             document.getElementById('pause-btn').classList.remove('hidden');
             document.getElementById('restart-btn').classList.remove('hidden');
             document.getElementById('continue-btn').classList.add('hidden');
         }
 
         function hideAllControls() {
+            document.getElementById('change-mode-btn').classList.add('hidden');
             document.getElementById('pause-btn').classList.add('hidden');
             document.getElementById('continue-btn').classList.add('hidden');
             document.getElementById('restart-btn').classList.add('hidden');
@@ -2189,6 +2196,7 @@
             game.pausedTime = (Date.now() - game.startTime) / 1000;
             document.getElementById('pause-btn').classList.add('hidden');
             document.getElementById('continue-btn').classList.remove('hidden');
+            document.getElementById('change-mode-btn').classList.add('hidden');
         }
 
         function continueGame() {
@@ -2198,7 +2206,37 @@
             game.pausedTime = 0;
             document.getElementById('pause-btn').classList.remove('hidden');
             document.getElementById('continue-btn').classList.add('hidden');
+            document.getElementById('change-mode-btn').classList.remove('hidden');
             gameLoop();
+        }
+
+        function changeModeToSelect() {
+            // Stop the game
+            game.isRunning = false;
+
+            // Show the mode selection overlay
+            document.getElementById('start-overlay').classList.remove('hidden');
+
+            // Hide all control buttons
+            hideAllControls();
+
+            // Reset game state
+            game.playerScore = 0;
+            game.aiScore = 0;
+            game.ballSpeedMultiplier = 1;
+            game.aiReactionSpeed = 0.85;
+            game.difficulty = 1;
+            paddle.player.velocity = 0;
+            paddle.ai.velocity = 0;
+            paddle.ai.maxSpeed = 6.5;
+            paddle.ai.reactionTime = 150;
+            paddle.ai.predictionError = 0;
+            paddle.ai.errorBias = 0;
+            paddle.ai.lastReactionUpdate = 0;
+
+            updateScoreDisplay();
+            initPositions();
+            render();
         }
 
         function restartGame() {
@@ -2368,6 +2406,7 @@
         document.getElementById('pause-btn').addEventListener('click', pauseGame);
         document.getElementById('continue-btn').addEventListener('click', continueGame);
         document.getElementById('restart-btn').addEventListener('click', restartGame);
+        document.getElementById('change-mode-btn').addEventListener('click', changeModeToSelect);
 
         // ===== LAYER SYSTEM EVENT LISTENERS =====
 
